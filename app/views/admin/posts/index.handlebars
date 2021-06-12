@@ -1,0 +1,77 @@
+<!-- Page Headings Start -->
+<div class='row justify-content-between align-items-center mb-10'>
+  <!-- Page Heading Start -->
+  <div class='col-12 col-lg-auto mb-20'>
+    <div class='page-heading'>
+      <h3>مطالب</h3>
+    </div>
+  </div>
+  <!-- Page Heading End -->
+
+  <!-- Page Button Group Start -->
+  <div class='col-12 col-lg-auto mb-20'>
+    <div class='buttons-group'>
+      <a href='new-post.html' class='button button-primary'>
+        <span><i class='zmdi zmdi-plus'></i>مطلب جدید</span>
+      </a>
+    </div>
+  </div>
+  <!-- Page Button Group End -->
+</div>
+<!-- Page Headings End -->
+
+<div class='row mbn-30'>
+  <!-- Revenue Statistics Chart Start -->
+  <div class='col-md-12 mb-30'>
+    <div class='box'>
+      <div class='box-head'>
+        <div class='row'>
+          <h4 class='title'>لیست مطالب بلاگ</h4>
+        </div>
+      </div>
+      <div class='box-body'>
+        <table class='table table-bordered mb-0'>
+          <!-- Table Head Start -->
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>عنوان</th>
+              <th>نویسنده</th>
+              <th>تاریخ ایجاد</th>
+              <th>تعداد بازدید</th>
+              <th>عملیات</th>
+            </tr>
+          </thead>
+          <!-- Table Head End -->
+
+          <!-- Table Body Start -->
+          <tbody>
+            {{#each posts}}
+              <tr>
+                <td>1</td>
+                <td><a href='###'>{{title}}</a></td>
+                <td>{{this.author_id}}</td>
+                <td>{{this.created_at}}</td>
+                <td>{{this.views}}</td>
+                <td>
+                  <div class='table-action-buttons'>
+                    <a
+                      class='edit button button-box button-xs button-info'
+                      href='#'
+                    ><i class='zmdi zmdi-edit'></i></a>
+                    <a
+                      class='delete button button-box button-xs button-danger'
+                      href='#'
+                    ><i class='zmdi zmdi-delete'></i></a>
+                  </div>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+          <!-- Table Body End -->
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Revenue Statistics Chart End -->
+</div>
