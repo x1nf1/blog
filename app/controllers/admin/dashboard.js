@@ -1,6 +1,6 @@
 'use strict';
 
-const statisticsModel = require('../../models/statistics');
+const statisticsModel = require('@models/statistics');
 
 exports.index = async (req, res, next) => {
   const data = {

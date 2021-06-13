@@ -1,6 +1,6 @@
 'use strict';
 
-const db = require('../../database/mysql');
+const db = require('@database/mysql');
 
 exports.totalViews = async () => {
   const [result] = await db.query('SELECT SUM(views) as totalViews FROM posts');
