@@ -30,6 +30,6 @@ module.exports.compose = async (req, res) => {
     content: req.body.content,
     status: req.body.status,
   };
-  await postsModel.store(postData);
+  await postsModel.compose(postData);
   res.send(req.body);
 };
