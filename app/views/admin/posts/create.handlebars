@@ -1,0 +1,100 @@
+<!-- Page Headings Start -->
+<div class='row justify-content-between align-items-center mb-10'>
+  <!-- Page Heading Start -->
+  <div class='col-12 col-lg-auto mb-20'>
+    <div class='page-heading'>
+      <h3 class='title'>مطالب <span>/ درج مطلب جدید</span></h3>
+    </div>
+  </div>
+  <!-- Page Heading End -->
+
+  <!-- Page Button Group End -->
+</div>
+<!-- Page Headings End -->
+
+<div class='row mbn-30'>
+  <!-- Revenue Statistics Chart Start -->
+  <div class='col-md-12 mb-30'>
+    <div class='box'>
+      <div class='box-head'>
+        <div class='row'>
+          <h4 class='title'>اطلاعات مطلب</h4>
+        </div>
+      </div>
+      <div class='box-body'>
+        <form action='/admin/posts/store' method='POST'>
+          <div class='row mbn-20'>
+            <div class='col-12 mb-20'>
+              <input
+                type='text'
+                name='title'
+                id='formLayoutUsername3'
+                class='form-control'
+                placeholder='عنوان مطلب'
+              />
+            </div>
+            <div class='col-12 mb-20'>
+              <input
+                type='text'
+                name='slug'
+                id='formLayoutEmail3'
+                class='form-control'
+                placeholder='نامک مطلب'
+              />
+            </div>
+
+            <div class='col-12 mb-20'>
+              <textarea
+                id='formLayoutMessage1'
+                name='content'
+                class='form-control'
+                placeholder='محتوای مطلب'
+              ></textarea>
+            </div>
+
+            <div class='col-12 mb-15'>
+              <select name='author' class='form-control'>
+                {{#each users}}
+
+                  <option value={{this.id}}> {{this.full_name}}</option>
+
+                {{/each}}
+
+              </select>
+            </div>
+
+            <div class='col-12 mb-20'>
+              <h6 class='mb-15'>وضعیت مطلب</h6>
+              <div class='form-group'>
+                <label class='inline'><input
+                    name='status'
+                    value='0'
+                    type='radio'
+                  />پیش نویس</label>
+                <label class='inline'><input
+                    name='status'
+                    value='1'
+                    type='radio'
+                  />در حال بازبینی</label>
+                <label class='inline'><input
+                    name='status'
+                    value='2'
+                    type='radio'
+                  />منتشرشده</label>
+              </div>
+            </div>
+
+            <div class='col-12 mb-20'>
+              <input
+                type='submit'
+                value='ذخیره سازی'
+                class='button button-primary'
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Revenue Statistics Chart End -->
+</div>

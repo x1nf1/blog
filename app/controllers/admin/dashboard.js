@@ -2,7 +2,7 @@
 
 const statisticsModel = require('@models/statistics');
 
-exports.index = async (req, res, next) => {
+exports.index = async (req, res) => {
   const data = {
     totalViews: await statisticsModel.totalViews(),
     totalPosts: await statisticsModel.totalPosts(),
