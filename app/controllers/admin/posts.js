@@ -4,6 +4,8 @@ const postsModel = require('@models/posts');
 const usersModel = require('@models/users');
 const { dateToPersian } = require('@services/dateService');
 const { toPersianNumber } = require('@services/langService');
+const postsValidator = require('@validators/posts');
+const sessionsModel = require('@models/sessions');
 
 module.exports.index = async (req, res) => {
   let posts = await postsModel.fetchPosts();
@@ -18,8 +20,18 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.create = async (req, res) => {
+  const sessionData = await sessionsModel.fetchSessions(
+    ['errors'],
+    req.signedCookies.sessID
+  );
+  await sessionsModel.updateSessions(null, req.signedCookies.sessID);
   const users = await usersModel.fetchUsers(['id', 'full_name']);
-  res.render('admin/posts/create', { layout: 'admin', users });
+  res.render('admin/posts/create', {
+    layout: 'admin',
+    users,
+    errors: sessionData?.errors,
+  });
+  req.session.errors = null;
 };
 
 module.exports.compose = async (req, res) => {
@@ -30,6 +42,20 @@ module.exports.compose = async (req, res) => {
     content: req.body.content,
     status: req.body.status,
   };
+
+  const validationError = await postsValidator.validate(postData);
+  if (validationError.errors.length > 0) {
+    try {
+      const result = await sessionsModel.updateSessions(
+        JSON.stringify(validationError.errors),
+        req.signedCookies.sessID
+      );
+      return res.redirect('/admin/posts/create');
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   await postsModel.compose(postData);
-  res.send(req.body);
+  res.redirect('/admin/posts');
 };

@@ -14,6 +14,6 @@ const numbers = {
 };
 exports.toPersianNumber = input => {
   return String(input)
-    .split('')
+    .split(' ')
     .map(char => (numbers[char] ? numbers[char] : char));
 };

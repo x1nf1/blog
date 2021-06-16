@@ -22,6 +22,15 @@
         </div>
       </div>
       <div class='box-body'>
+        {{#if errors}}
+          <div class='alert alert-solid-danger' role='alert'>
+            <ul>
+              {{#each errors}}
+                <li>{{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        {{/if}}
         <form action='/admin/posts/compose' method='POST'>
           <div class='row mbn-20'>
             <div class='col-12 mb-20'>

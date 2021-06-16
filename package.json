@@ -16,12 +16,16 @@
     "@controllers": "app/controllers",
     "@routes": "app/routes",
     "@database": "database",
-    "@services": "app/services"
+    "@services": "app/services",
+    "@validators": "app/validators",
+    "@config": "config"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.2",
+    "express-mysql-session": "^2.1.6",
     "express-session": "^1.17.2",
     "jalali-moment": "^3.3.10",
     "module-alias": "^2.2.2",
