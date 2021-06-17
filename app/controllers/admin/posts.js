@@ -46,7 +46,7 @@ module.exports.compose = async (req, res) => {
   const validationError = await postsValidator.validate(postData);
   if (validationError.errors.length > 0) {
     try {
-      const result = await sessionsModel.updateSessions(
+      await sessionsModel.updateSessions(
         JSON.stringify(validationError.errors),
         req.signedCookies.sessID
       );
