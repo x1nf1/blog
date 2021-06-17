@@ -8,7 +8,7 @@ const postsValidator = require('@validators/posts');
 const sessionsModel = require('@models/sessions');
 
 module.exports.index = async (req, res) => {
-  let posts = await postsModel.fetchPosts();
+  let posts = await postsModel.fetchAllPosts();
   // using services
   const presentedPosts = posts.map(post => {
     post.jalali_created_at = dateToPersian(post.created_at);
@@ -61,5 +61,29 @@ module.exports.compose = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
   await postsModel.delete(req.params.postID);
+  res.redirect('/admin/posts');
+};
+
+module.exports.edit = async (req, res) => {
+  const users = await usersModel.fetchUsers(['id', 'full_name']);
+  const [post] = await postsModel.fetchPost(req.params.postID);
+  res.render('admin/posts/edit', {
+    layout: 'admin',
+    post,
+    users,
+  });
+};
+
+module.exports.update = async (req, res) => {
+  const postData = {
+    title: req.body.title,
+    author_id: req.body.author,
+    slug: req.body.slug,
+    content: req.body.content,
+    status: req.body.status,
+  };
+
+  const result = await postsModel.update(postData, req.params.postID);
+
   res.redirect('/admin/posts');
 };
