@@ -31,7 +31,6 @@ module.exports.create = async (req, res) => {
     users,
     errors: sessionData?.errors,
   });
-  req.session.errors = null;
 };
 
 module.exports.compose = async (req, res) => {
