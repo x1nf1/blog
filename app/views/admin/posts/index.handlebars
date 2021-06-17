@@ -48,7 +48,7 @@
           <tbody>
             {{#each posts}}
               <tr>
-                <td>1</td>
+                <td>{{this.id}}</td>
                 <td><a href='###'>{{title}}</a></td>
                 <td>{{this.full_name}}</td>
                 <td>{{this.jalali_created_at}}</td>
@@ -61,7 +61,7 @@
                     ><i class='zmdi zmdi-edit'></i></a>
                     <a
                       class='delete button button-box button-xs button-danger'
-                      href='#'
+                      href='/admin/posts/delete/{{this.id}}'
                     ><i class='zmdi zmdi-delete'></i></a>
                   </div>
                 </td>

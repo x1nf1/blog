@@ -16,3 +16,8 @@ module.exports.compose = async postData => {
   const [result] = await db.query('INSERT INTO posts SET ?', postData);
   return result;
 };
+
+module.exports.delete = async postID => {
+  const [result] = await db.query('DELETE FROM posts WHERE id = ?', [postID]);
+  return result.affectedRows;
+};

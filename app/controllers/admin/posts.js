@@ -58,3 +58,8 @@ module.exports.compose = async (req, res) => {
   await postsModel.compose(postData);
   res.redirect('/admin/posts');
 };
+
+module.exports.delete = async (req, res) => {
+  await postsModel.delete(req.params.postID);
+  res.redirect('/admin/posts');
+};
