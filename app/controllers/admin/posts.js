@@ -67,10 +67,23 @@ module.exports.delete = async (req, res) => {
 module.exports.edit = async (req, res) => {
   const users = await usersModel.fetchUsers(['id', 'full_name']);
   const [post] = await postsModel.fetchPost(req.params.postID);
+  console.log(post);
   res.render('admin/posts/edit', {
     layout: 'admin',
     post,
     users,
+    helpers: {
+      isPostAuthor: function (userID, options) {
+        return userID === post.author_id
+          ? options.fn(this)
+          : options.inverse(this);
+      },
+      isPostStatus: function (status, options) {
+        return status === post.status
+          ? options.fn(this)
+          : options.inverse(this);
+      },
+    },
   });
 };
 

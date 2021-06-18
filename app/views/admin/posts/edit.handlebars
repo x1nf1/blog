@@ -67,7 +67,9 @@
               <select name='author' class='form-control'>
                 {{#each users}}
 
-                  <option value={{this.id}}> {{this.full_name}}</option>
+                  <option {{#isPostAuthor this.id}}selected {{/isPostAuthor}} value={{this.id}}>
+                    {{this.full_name}}
+                  </option>
 
                 {{/each}}
 
@@ -80,16 +82,19 @@
                 <label class='inline'><input
                     name='status'
                     value='0'
+                    {{#isPostStatus post.status}} checked {{/isPostStatus}}
                     type='radio'
                   />پیش نویس</label>
                 <label class='inline'><input
                     name='status'
                     value='1'
+                    {{#isPostStatus post.status}} checked {{/isPostStatus}}
                     type='radio'
                   />در حال بازبینی</label>
                 <label class='inline'><input
                     name='status'
                     value='2'
+                    {{#isPostStatus post.status}} checked {{/isPostStatus}}
                     type='radio'
                   />منتشرشده</label>
               </div>
