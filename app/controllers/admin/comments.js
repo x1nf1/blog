@@ -2,7 +2,6 @@
 
 const commentsModel = require('@models/comments');
 const { dateToPersian } = require('@services/dateService');
-const { toPersianNumber } = require('@services/langService');
 const { fetchGravatarURL } = require('@services/gravatarService');
 
 module.exports.index = async (req, res) => {
