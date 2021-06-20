@@ -18,7 +18,7 @@ module.exports.index = async (req, res) => {
     layout: 'admin',
     comments: presentedComments,
     helpers: {
-      toggleBackground: function (status) {
+      commentBackground: function (status) {
         switch (status) {
           case commentStatuses.APPROVED:
             return 'alert-success';
