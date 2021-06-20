@@ -36,7 +36,7 @@
           <!-- Table Body Start -->
           <tbody>
             {{#each comments}}
-              <tr>
+              <tr class="{{#toggleBackground this.status}}  {{/toggleBackground}}">
                 <td><img
                     src='{{this.gravatar}}'
                     alt=''
@@ -46,10 +46,10 @@
                 <td>{{this.comment}}</td>
                 <td>{{this.title}}</td>
                 <td>
-                  <button class='button button-success'><span
+                  <a href="/admin/comments/approve/{{this.id}}" class='button button-success' ><span
                     >تایید</span></button>
-                  <button class='button button-warning'><span>رد</span></button>
-                  <button class='button button-danger'><span>حذف</span></button>
+                  <a href="/admin/comments/reject/{{this.id}}" class='button button-warning'><span>رد</span></button>
+                  <a href="/admin/comments/delete/{{this.id}}" class='button button-danger'><span>حذف</span></button>
                 </td>
                 <td>{{this.jalali_created_at}}</td>
               </tr>
