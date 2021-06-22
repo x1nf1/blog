@@ -6,7 +6,6 @@ const db = require('@database/mysql');
 const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const middlewares = require('@middlewares');
 
 const sessionStore = new MYSQLStore({}, db);
 
