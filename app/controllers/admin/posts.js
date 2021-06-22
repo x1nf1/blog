@@ -16,7 +16,7 @@ module.exports.index = async (req, res) => {
     return post;
   });
 
-  res.render('admin/posts', { layout: 'admin', posts: presentedPosts });
+  res.renderACP('admin/posts', { posts: presentedPosts });
 };
 
 module.exports.create = async (req, res) => {
@@ -26,11 +26,7 @@ module.exports.create = async (req, res) => {
   );
   await sessionsModel.updateSessions(null, req.signedCookies.sessID);
   const users = await usersModel.fetchUsers(['id', 'full_name']);
-  res.render('admin/posts/create', {
-    layout: 'admin',
-    users,
-    errors: sessionData?.errors,
-  });
+  res.renderACP('admin/posts/create', { users, errors: sessionData?.errors });
 };
 
 module.exports.compose = async (req, res) => {
@@ -67,8 +63,7 @@ module.exports.delete = async (req, res) => {
 module.exports.edit = async (req, res) => {
   const users = await usersModel.fetchUsers(['id', 'full_name']);
   const [post] = await postsModel.fetchPost(req.params.postID);
-  res.render('admin/posts/edit', {
-    layout: 'admin',
+  res.renderACP('admin/posts/edit', {
     post,
     users,
     helpers: {
@@ -95,7 +90,7 @@ module.exports.update = async (req, res) => {
     status: req.body.status,
   };
 
-  const result = await postsModel.update(postData, req.params.postID);
+  await postsModel.update(postData, req.params.postID);
 
   res.redirect('/admin/posts');
 };

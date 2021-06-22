@@ -18,7 +18,8 @@
     "@database": "database",
     "@services": "app/services",
     "@validators": "app/validators",
-    "@config": "config"
+    "@config": "config",
+    "@middlewares": "app/middlewares"
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
