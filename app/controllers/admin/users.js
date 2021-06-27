@@ -64,7 +64,12 @@ module.exports.update = async (req, res) => {
     role: req.body.role,
   };
 
-  await usersModel.update(userData, req.params.userID);
+  const updatedUserData = {
+    ...userData,
+    password: await hashService.hashPassword(userData.password),
+  };
+
+  await usersModel.update(updatedUserData, req.params.userID);
 
   res.redirect('/admin/users');
 };
