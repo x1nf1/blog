@@ -1,0 +1,104 @@
+<!-- Page Headings Start -->
+<div class='row justify-content-between align-items-center mb-10'>
+  <!-- Page Heading Start -->
+  <div class='col-12 col-lg-auto mb-20'>
+    <div class='page-heading'>
+      <h3 class='title'>کاربران <span>/ ویرایش کاربر</span></h3>
+    </div>
+  </div>
+  <!-- Page Heading End -->
+
+  <!-- Page Button Group End -->
+</div>
+<!-- Page Headings End -->
+
+<div class='row mbn-30'>
+  <!-- Revenue Statistics Chart Start -->
+  <div class='col-md-12 mb-30'>
+    <div class='box'>
+      <div class='box-head'>
+        <div class='row'>
+          <h4 class='title'>اطلاعات کاربر</h4>
+        </div>
+      </div>
+      <div class='box-body'>
+        {{#if errors}}
+          <div class='alert alert-solid-danger' role='alert'>
+            <ul>
+              {{#each errors}}
+                <li>{{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        {{/if}}
+        <form action='/admin/users/update/{{user.id}}' method='POST'>
+          <div class='row mbn-20'>
+            <div class='col-12 mb-20'>
+              <input
+                type='text'
+                name='full_name'
+                value='{{user.full_name}}'
+                id='formLayoutUsername3'
+                class='form-control'
+                placeholder='نام و نام خانوادگی'
+              />
+            </div>
+            <div class='col-12 mb-20'>
+              <input
+                type='email'
+                name='email'
+                value='{{user.email}}'
+                id='formLayoutEmail3'
+                class='form-control'
+                placeholder='ایمیل'
+              />
+            </div>
+
+            <div class='col-12 mb-20'>
+              <input
+                type='password'
+                id='formLayoutMessage1'
+                name='password'
+                class='form-control'
+                placeholder='کلمه عبور'
+              />
+            </div>
+
+            <div class='col-12 mb-20'>
+              <h6 class='mb-15'>نقش کاربر</h6>
+              <div class='form-group'>
+                <label class='inline'><input
+                    name='role'
+                    value='0'
+                    {{#isUserRole userRoles.ENDUSER}} checked {{/isUserRole}}
+                    type='radio'
+                  />کاربری</label>
+                <label class='inline'><input
+                    name='role'
+                    value='1'
+                    {{#isUserRole userRoles.AUTHOR}} checked {{/isUserRole}}
+                    type='radio'
+                  />نویسنده</label>
+                <label class='inline'><input
+                    name='role'
+                    value='2'
+                    {{#isUserRole userRoles.ADMIN}} checked {{/isUserRole}}
+                    type='radio'
+                  />مدیر</label>
+              </div>
+            </div>
+
+            <div class='col-12 mb-20'>
+              <input
+                type='submit'
+                value='ذخیره سازی'
+                class='button button-primary'
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Revenue Statistics Chart End -->
+</div>

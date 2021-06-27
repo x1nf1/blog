@@ -1,0 +1,75 @@
+<!-- Page Headings Start -->
+<div class='row justify-content-between align-items-center mb-10'>
+  <!-- Page Heading Start -->
+  <div class='col-12 col-lg-auto mb-20'>
+    <div class='page-heading'>
+      <h3>کاربران</h3>
+    </div>
+  </div>
+  <!-- Page Heading End -->
+
+  <!-- Page Button Group Start -->
+  <div class='col-12 col-lg-auto mb-20'>
+    <div class='buttons-group'>
+      <a href='/admin/users/register' class='button button-primary'>
+        <span><i class='zmdi zmdi-plus'></i>کاربر جدید</span>
+      </a>
+    </div>
+  </div>
+  <!-- Page Button Group End -->
+</div>
+<!-- Page Headings End -->
+
+<div class='row mbn-30'>
+  <!-- Revenue Statistics Chart Start -->
+  <div class='col-md-12 mb-30'>
+    <div class='box'>
+      <div class='box-head'>
+        <div class='row'>
+          <h4 class='title'>لیست کاربران بلاگ</h4>
+        </div>
+      </div>
+      <div class='box-body'>
+        <table class='table table-bordered mb-0'>
+          <!-- Table Head Start -->
+          <thead>
+            <tr>
+              <th>شناسه</th>
+              <th>نام و نام خانوادگی</th>
+              <th>ایمیل</th>
+              <th>تاریخ ثبت نام</th>
+              <th>عملیات</th>
+            </tr>
+          </thead>
+          <!-- Table Head End -->
+
+          <!-- Table Body Start -->
+          <tbody>
+            {{#each users}}
+              <tr>
+                <td>{{this.id}}</td>
+                <td><a href='###'>{{this.full_name}}</a></td>
+                <td>{{this.email}}</td>
+                <td>{{this.created_at}}</td>
+                <td>
+                  <div class='table-action-buttons'>
+                    <a
+                      class='edit button button-box button-xs button-info'
+                      href='/admin/users/edit/{{this.id}}'
+                    ><i class='zmdi zmdi-edit'></i></a>
+                    <a
+                      class='delete button button-box button-xs button-danger'
+                      href='/admin/users/delete/{{this.id}}'
+                    ><i class='zmdi zmdi-delete'></i></a>
+                  </div>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+          <!-- Table Body End -->
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- Revenue Statistics Chart End -->
+</div>
