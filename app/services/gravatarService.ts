@@ -3,7 +3,7 @@
 const gravatar = require('gravatar');
 
 module.exports = class GravatarService {
-  static fetchGravatarURL(email, options) {
+  static fetchGravatarURL(email: string, options: object) {
     return gravatar.url(email, options);
   }
 };
