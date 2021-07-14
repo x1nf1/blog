@@ -2,8 +2,8 @@
 
 const postsModel = require('@models/posts');
 const usersModel = require('@models/users');
-const { dateToPersian } = require('@services/dateService');
-const { toPersianNumber } = require('@services/langService');
+const DateService = require('@services/dateService');
+const LangService = require('@services/langService');
 const postsValidator = require('@validators/posts');
 const sessionsModel = require('@models/sessions');
 
@@ -11,8 +11,8 @@ module.exports.index = async (req, res) => {
   let posts = await postsModel.fetchAllPosts();
   // using services
   const presentedPosts = posts.map(post => {
-    post.jalali_created_at = dateToPersian(post.created_at);
-    post.views_persian = toPersianNumber(post.views);
+    post.jalali_created_at = DateService.dateToPersian(post.created_at);
+    post.views_persian = LangService.numberToPersian(post.views);
     return post;
   });
 
@@ -35,7 +35,7 @@ module.exports.compose = async (req, res) => {
     author_id: req.body.author,
     slug: req.body.slug,
     content: req.body.content,
-    status: req.body.status,
+    status: req.body.status
   };
 
   const validationError = await postsValidator.validate(postData);
@@ -67,17 +67,17 @@ module.exports.edit = async (req, res) => {
     post,
     users,
     helpers: {
-      isPostAuthor: function (userID, options) {
+      isPostAuthor: function(userID, options) {
         return userID === post.author_id
           ? options.fn(this)
           : options.inverse(this);
       },
-      isPostStatus: function (status, options) {
+      isPostStatus: function(status, options) {
         return status === post.status
           ? options.fn(this)
           : options.inverse(this);
-      },
-    },
+      }
+    }
   });
 };
 
@@ -87,7 +87,7 @@ module.exports.update = async (req, res) => {
     author_id: req.body.author,
     slug: req.body.slug,
     content: req.body.content,
-    status: req.body.status,
+    status: req.body.status
   };
 
   await postsModel.update(postData, req.params.postID);

@@ -3,7 +3,7 @@
 const usersModel = require('@models/users');
 const sessionsModel = require('@models/sessions');
 const userRoles = require('@models/users/userRoles');
-const hashService = require('@services/hashService');
+const HashService = require('@services/hashService');
 
 module.exports.index = async (req, res) => {
   let users = await usersModel.fetchUsers();
@@ -31,7 +31,7 @@ module.exports.createUser = async (req, res) => {
 
   const updatedUserData = {
     ...userData,
-    password: await hashService.hashPassword(userData.password),
+    password: await HashService.hashPassword(userData.password),
   };
 
   await usersModel.createUser(updatedUserData);
@@ -66,7 +66,7 @@ module.exports.update = async (req, res) => {
 
   const updatedUserData = {
     ...userData,
-    password: await hashService.hashPassword(userData.password),
+    password: await HashService.hashPassword(userData.password),
   };
 
   await usersModel.update(updatedUserData, req.params.userID);

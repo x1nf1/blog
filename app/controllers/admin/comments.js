@@ -1,16 +1,16 @@
 'use strict';
 
 const commentsModel = require('@models/comments');
-const { dateToPersian } = require('@services/dateService');
-const { fetchGravatarURL } = require('@services/gravatarService');
+const DateService = require('@services/dateService');
+const GravatarService = require('@services/gravatarService');
 const commentStatuses = require('@models/comments/commentStatuses');
 
 module.exports.index = async (req, res) => {
   const comments = await commentsModel.fetchAllComments();
 
   const presentedComments = comments.map(comment => {
-    comment.jalali_created_at = dateToPersian(comment.created_at);
-    comment.gravatar = fetchGravatarURL(comment.user_email);
+    comment.jalali_created_at = DateService.dateToPersian(comment.created_at);
+    comment.gravatar = GravatarService.fetchGravatarURL(comment.user_email);
     return comment;
   });
 
