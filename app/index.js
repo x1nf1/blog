@@ -1,10 +1,11 @@
 'use strict';
 const express = require('express');
 const app = express();
+const MainRouter = require('@routes');
 
 require('./bootstrap')(app);
 require('@middlewares')(app);
-require('@routes')(app);
+new MainRouter(app);
 
 module.exports = () => {
   const port = process.env.APP_PORT;
