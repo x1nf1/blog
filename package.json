@@ -22,6 +22,7 @@
     "@middlewares": "app/middlewares"
   },
   "dependencies": {
+    "@types/gravatar": "^1.8.3",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",
