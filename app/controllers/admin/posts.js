@@ -11,7 +11,6 @@ module.exports.index = async (req, res) => {
   let posts = await postsModel.fetchAllPosts();
   // using services
   const presentedPosts = posts.map(post => {
-    // post.jalali_created_at = DateService.dateToPersian(post.created_at);
     post.jalali_created_at = new JalaliMomentService(post.created_at).dateToPersian();
     post.views_persian = LangService.numberToPersian(post.views);
     return post;
