@@ -1,7 +1,7 @@
 'use strict';
 
 const commentsModel = require('@models/comments');
-const DateService = require('@services/dateService');
+const JalaliMomentService = require('@services/dateService');
 const GravatarService = require('@services/gravatarService');
 const commentStatuses = require('@models/comments/commentStatuses');
 
@@ -9,7 +9,7 @@ module.exports.index = async (req, res) => {
   const comments = await commentsModel.fetchAllComments();
 
   const presentedComments = comments.map(comment => {
-    comment.jalali_created_at = DateService.dateToPersian(comment.created_at);
+    comment.jalali_created_at = new JalaliMomentService(comment.created_at).dateToPersian();
     comment.gravatar = GravatarService.fetchGravatarURL(comment.user_email);
     return comment;
   });
@@ -18,7 +18,7 @@ module.exports.index = async (req, res) => {
     layout: 'admin',
     comments: presentedComments,
     helpers: {
-      commentBackground: function (status) {
+      commentBackground: function(status) {
         switch (status) {
           case commentStatuses.APPROVED:
             return 'alert-success';
@@ -29,8 +29,8 @@ module.exports.index = async (req, res) => {
           default:
             break;
         }
-      },
-    },
+      }
+    }
   });
 };
 

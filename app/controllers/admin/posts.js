@@ -2,7 +2,7 @@
 
 const postsModel = require('@models/posts');
 const usersModel = require('@models/users');
-const DateService = require('@services/dateService');
+const JalaliMomentService = require('@services/dateService');
 const LangService = require('@services/langService');
 const postsValidator = require('@validators/posts');
 const sessionsModel = require('@models/sessions');
@@ -11,7 +11,8 @@ module.exports.index = async (req, res) => {
   let posts = await postsModel.fetchAllPosts();
   // using services
   const presentedPosts = posts.map(post => {
-    post.jalali_created_at = DateService.dateToPersian(post.created_at);
+    // post.jalali_created_at = DateService.dateToPersian(post.created_at);
+    post.jalali_created_at = new JalaliMomentService(post.created_at).dateToPersian();
     post.views_persian = LangService.numberToPersian(post.views);
     return post;
   });

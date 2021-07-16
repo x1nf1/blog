@@ -1,9 +1,16 @@
 'use strict';
 const jalaliMoment = require('jalali-moment');
 
-module.exports = class DateService {
-  static dateToPersian(date, format = 'YYYY/MM/DD') {
-    return jalaliMoment(date).locale('fa').format(format);
+interface isDateService {
+  dateToPersian(): string
+}
+
+module.exports = class JalaliMomentService implements isDateService {
+  constructor(private _date: string, private _foramt: string = 'YYYY/MM/DD') {
+  }
+
+  dateToPersian(): string {
+    return jalaliMoment(this._date).locale('fa').format(this._foramt);
   }
 };
 //# sourceMappingURL=dateServiceCopy.js.map
