@@ -11,3 +11,7 @@ database/**/*.js
 database/**/*.map
 app/services/**/*.js
 app/services/**/*.map
+app/presenters/**/*.js
+app/presenters/**/*.map
+app/helpers/**/*.js
+app/helpers/**/*.map

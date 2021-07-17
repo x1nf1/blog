@@ -2,21 +2,22 @@
 
 const postsModel = require('@models/posts');
 const usersModel = require('@models/users');
-const JalaliMomentService = require('@services/dateService');
-const LangService = require('@services/langService');
+const PostPresenter = require('@presenters/posts');
+const postsHelpers = require('@helpers/posts');
 const postsValidator = require('@validators/posts');
 const sessionsModel = require('@models/sessions');
 
 module.exports.index = async (req, res) => {
   let posts = await postsModel.fetchAllPosts();
-  // using services
+
   const presentedPosts = posts.map(post => {
-    post.jalali_created_at = new JalaliMomentService(post.created_at).dateToPersian();
-    post.views_persian = LangService.numberToPersian(post.views);
+    post.presenter = new PostPresenter(post);
     return post;
   });
-
-  res.renderACP('admin/posts', { posts: presentedPosts });
+  
+  res.renderACP('admin/posts', {
+    posts: presentedPosts, helpers: postsHelpers
+  });
 };
 
 module.exports.create = async (req, res) => {

@@ -19,7 +19,9 @@
     "@services": "app/services",
     "@validators": "app/validators",
     "@config": "config",
-    "@middlewares": "app/middlewares"
+    "@middlewares": "app/middlewares",
+    "@presenters": "app/presenters",
+    "@helpers": "app/helpers"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
