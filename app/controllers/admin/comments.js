@@ -1,36 +1,20 @@
 'use strict';
 
 const commentsModel = require('@models/comments');
-const JalaliMomentService = require('@services/dateService');
-const GravatarService = require('@services/gravatarService');
-const commentStatuses = require('@models/comments/commentStatuses');
+const CommentPresenter = require('@presenters/comments');
+const commentsHelpers = require('@helpers/comments');
 
 module.exports.index = async (req, res) => {
   const comments = await commentsModel.fetchAllComments();
 
   const presentedComments = comments.map(comment => {
-    comment.jalali_created_at = new JalaliMomentService(comment.created_at).dateToPersian();
-    comment.gravatar = GravatarService.fetchGravatarURL(comment.user_email);
+    comment.presenter = new CommentPresenter(comment);
     return comment;
   });
 
   res.render('admin/comments', {
     layout: 'admin',
-    comments: presentedComments,
-    helpers: {
-      commentBackground: function(status) {
-        switch (status) {
-          case commentStatuses.APPROVED:
-            return 'alert-success';
-          case commentStatuses.REJECTED:
-            return 'alert-danger';
-          case commentStatuses.REVIEW:
-            return 'alert-info';
-          default:
-            break;
-        }
-      }
-    }
+    comments: presentedComments, helpers : commentsHelpers
   });
 };
 
