@@ -1,13 +1,11 @@
 'use strict';
 const express = require('express');
 const session = require('express-session');
-const MYSQLStore = require('express-mysql-session')(session);
-const db = require('@database/mysql');
 const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const flash = require('connect-flash');
 
-const sessionStore = new MYSQLStore({}, db);
 
 module.exports = app => {
   app.use(express.json());
@@ -17,11 +15,11 @@ module.exports = app => {
     session({
       name: 'sessID',
       secret: process.env.APP_COOKIE_SECRET,
-      store: sessionStore,
       resave: false,
-      saveUninitialized: true,
+      saveUninitialized: true
     })
   );
+  app.use(flash());
   app.engine('handlebars', exphbs());
   app.set('view engine', 'handlebars');
   app.set('views', path.join(__dirname, '../views'));

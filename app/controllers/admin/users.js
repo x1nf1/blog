@@ -1,7 +1,6 @@
 'use strict';
 
 const usersModel = require('@models/users');
-const sessionsModel = require('@models/sessions');
 const userRoles = require('@models/users/userRoles');
 const HashService = require('@services/hashService');
 
@@ -12,11 +11,6 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.register = async (req, res) => {
-  const sessionData = await sessionsModel.fetchSessions(
-    ['errors'],
-    req.signedCookies.sessID
-  );
-  await sessionsModel.updateSessions(null, req.signedCookies.sessID);
   const users = await usersModel.fetchUsers(['id', 'full_name']);
   res.renderACP('admin/users/register', { users, errors: sessionData?.errors });
 };

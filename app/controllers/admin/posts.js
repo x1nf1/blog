@@ -5,7 +5,6 @@ const usersModel = require('@models/users');
 const PostPresenter = require('@presenters/posts');
 const postsHelpers = require('@helpers/posts');
 const postsValidator = require('@validators/posts');
-const sessionsModel = require('@models/sessions');
 
 module.exports.index = async (req, res) => {
   let posts = await postsModel.fetchAllPosts();
@@ -14,20 +13,15 @@ module.exports.index = async (req, res) => {
     post.presenter = new PostPresenter(post);
     return post;
   });
-  
+
   res.renderACP('admin/posts', {
     posts: presentedPosts, helpers: postsHelpers
   });
 };
 
 module.exports.create = async (req, res) => {
-  const sessionData = await sessionsModel.fetchSessions(
-    ['errors'],
-    req.signedCookies.sessID
-  );
-  await sessionsModel.updateSessions(null, req.signedCookies.sessID);
   const users = await usersModel.fetchUsers(['id', 'full_name']);
-  res.renderACP('admin/posts/create', { users, errors: sessionData?.errors });
+  res.renderACP('admin/posts/create', { users });
 };
 
 module.exports.compose = async (req, res) => {
@@ -40,20 +34,14 @@ module.exports.compose = async (req, res) => {
   };
 
   const validationError = await postsValidator.validate(postData);
-  if (validationError.errors.length > 0) {
-    try {
-      await sessionsModel.updateSessions(
-        JSON.stringify(validationError.errors),
-        req.signedCookies.sessID
-      );
-      return res.redirect('/admin/posts/create');
-    } catch (e) {
-      console.log(e);
-    }
+  if (validationError.length > 0) {
+    req.flash('errors', validationError);
+    return res.redirect('/admin/posts/create');
+  } else {
+    await postsModel.compose(postData);
+    req.flash('success', 'مطلب با موفقیت ایجاد شد');
+    return res.redirect('/admin/posts');
   }
-
-  await postsModel.compose(postData);
-  res.redirect('/admin/posts');
 };
 
 module.exports.delete = async (req, res) => {
