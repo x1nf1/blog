@@ -1,7 +1,7 @@
-'use strcit';
+'use strict';
 
 module.exports = {
-  ENDUSER: 0,
+  USER: 0,
   AUTHOR: 1,
   ADMIN: 2,
 };

@@ -20,6 +20,11 @@ module.exports.fetchUser = async userID => {
   return result;
 };
 
+module.exports.findUserByEmail = async (email) => {
+  const [user] = await db.query(`SELECT * FROM users WHERE email = ? LIMIT 1` , [email]);
+  return user.length === 1 ? user[0] : false;
+};
+
 module.exports.createUser = async userData => {
   const [result] = await db.query('INSERT INTO users SET ?', userData);
   return result;
