@@ -10,7 +10,7 @@ module.exports.showLogin = function(req, res) {
 module.exports.doLogin = async function(req, res) {
   const { email, password } = req.body;
 
-  const user = await AuthService.authenticate(email, password);
+  const user = await AuthService.login(email, password);
 
   if (!user) {
     req.flash('errors', ['ایمیل یا کلمه عبور معتبر نمی باشد']);

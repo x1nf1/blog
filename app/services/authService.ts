@@ -4,7 +4,7 @@ const usersModel = require('@models/users');
 const HashService = require('@services/hashService');
 
 module.exports = class AuthService {
-  static async authenticate(email, plainPassword) {
+  static async login(email, plainPassword) {
     const user = await usersModel.findUserByEmail(email, plainPassword);
 
     if (!user)
