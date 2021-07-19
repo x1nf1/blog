@@ -20,6 +20,10 @@ module.exports = app => {
     res.renderACP = function(template, options) {
       res.render(template, { layout: 'admin', ...options, errors, success, user });
     };
+
+    res.renderFront = function(template, options) {
+      res.render(template, { layout: 'home', ...options });
+    };
     next();
   });
 };
