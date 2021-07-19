@@ -117,20 +117,20 @@
                         <span class='user'>
                           <span class='avatar'>
                             <img
-                              src='/static/assets/images/avatar/avatar-1.jpg'
+                              src='{{user.gravatar}}'
                               alt=''
                             />
                             <span class='status'></span>
                           </span>
-                          <span class='name'>طاهر نصیری</span>
+                          <span class='name'>{{user.full_name}}</span>
                         </span>
                       </a>
 
                       <!-- Dropdown -->
                       <div class='adomx-dropdown-menu dropdown-menu-user'>
                         <div class='head'>
-                          <h5 class='name'><a href='#'>طاهر نصیری</a></h5>
-                          <a class='mail' href='#'>mailnam@mail.com</a>
+                          <h5 class='name'><a href='#'>{{user.full_name}}</a></h5>
+                          <a class='mail' href='#'>{{user.email}}</a>
                         </div>
                         <div class='body'>
                           <ul>

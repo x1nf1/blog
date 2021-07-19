@@ -12,9 +12,8 @@ module.exports.index = async (req, res) => {
     return comment;
   });
 
-  res.render('admin/comments', {
-    layout: 'admin',
-    comments: presentedComments, helpers : commentsHelpers
+  res.renderACP('admin/comments', {
+    comments: presentedComments, helpers: commentsHelpers
   });
 };
 
