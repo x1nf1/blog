@@ -41,3 +41,9 @@ module.exports.doRegister = async function(req, res) {
     return res.redirect('/auth/register');
   }
 };
+
+module.exports.logout = async function(req, res) {
+  req.session.destroy(error => {
+    res.redirect('/auth/login');
+  });
+};

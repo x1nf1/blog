@@ -17,7 +17,8 @@ module.exports = app => {
       secret: process.env.APP_COOKIE_SECRET,
       resave: false,
       saveUninitialized: true,
-      store: require('./session-handler/redis')(session)
+      store: require('./session-handler/redis')(session),
+      unset: 'destroy'
     })
   );
   app.use(flash());
