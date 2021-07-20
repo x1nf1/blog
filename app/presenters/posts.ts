@@ -16,7 +16,7 @@ module.exports = class PostPresenter {
   }
 
   excerpt() {
-    return this._post.content.split(' ').slice(0, 21).join(' ');
+    return this._post.content.split(' ').slice(0, 21).join(' ') + ' ...';
   }
 
 };

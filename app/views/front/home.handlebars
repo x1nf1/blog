@@ -10,3 +10,11 @@
     <p>{{#getExcerpt this}} {{/getExcerpt}}</p>
   </div>
 {{/each}}
+<div class="pagination justify-content-center">
+  <a href="/?page={{pagination.prevPage}}" class="btn btn-dark {{#unless pagination.prevPage}} disabled {{/unless}}"><i
+  class="fa fa-angle-left"></i></a>
+  <div class="h6 mt-2 mx-4">
+    {{pagination.currentPage}} از {{pagination.totalPages}}
+  </div>
+  <a href="/?page={{pagination.nextPage}}" class="btn btn-dark {{#unless pagination.nextPage}} disabled {{/unless}}"><i class="fa fa-angle-right"></i></a>
+</div>
