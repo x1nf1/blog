@@ -34,6 +34,20 @@ module.exports.fetchPost = async postID => {
   return result;
 };
 
+module.exports.fetchPostBySlug = async postSlug => {
+  const [result] = await db.query(
+    `
+ SELECT posts.*, users.full_name
+  FROM posts
+  LEFT JOIN users ON posts.author_id = users.id
+  WHERE slug = ?
+  LIMIT 1
+  `,
+    [postSlug]
+  );
+  return result[0];
+};
+
 module.exports.compose = async postData => {
   const [result] = await db.query('INSERT INTO posts SET ?', postData);
   return result;

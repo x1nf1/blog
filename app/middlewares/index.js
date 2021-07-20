@@ -24,6 +24,10 @@ module.exports = app => {
     res.renderFront = function(template, options) {
       res.render(template, { layout: 'home', ...options });
     };
+
+    res.renderPost = function(template, options) {
+      res.render(template, { layout: 'post', ...options });
+    };
     next();
   });
 };
