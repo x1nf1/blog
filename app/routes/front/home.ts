@@ -6,7 +6,7 @@ class HomeRouter {
   private _router = this._express.Router();
 
   constructor() {
-    this._router.get('/',homeControllers.index);
+    this._router.get('/', homeControllers.index);
   }
 
   get router(): any {
