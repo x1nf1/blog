@@ -15,4 +15,8 @@ module.exports = class PostPresenter {
     return LangService.numberToPersian(this._post.views);
   }
 
+  excerpt() {
+    return this._post.content.split(' ').slice(0, 21).join(' ');
+  }
+
 };

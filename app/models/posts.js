@@ -6,7 +6,7 @@ module.exports.fetchAllPosts = async () => {
   const [result] = await db.query(`
   SELECT posts.*, users.full_name
   FROM posts
-  JOIN users ON posts.author_id = users.id
+  LEFT JOIN users ON posts.author_id = users.id
   ORDER BY created_at DESC
   `);
   return result;
