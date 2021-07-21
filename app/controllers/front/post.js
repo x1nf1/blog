@@ -6,6 +6,7 @@ const usersModel = require('@models/users');
 const GravatarService = require('@services/gravatarService');
 const commentsModel = require('@models/comments');
 const commentsPresenter = require('@presenters/comments');
+const _ = require('lodash');
 
 module.exports.showPost = async function(req, res) {
   const post = await postsModel.fetchPostBySlug(req.params.postSlug);
@@ -21,6 +22,17 @@ module.exports.showPost = async function(req, res) {
     comment.presenter = new commentsPresenter(comment);
     return comment;
   });
+  const groupedComments = _.groupBy(post.comments, 'parent');
+  console.log(post.comments);
   post.presenter = new PostsPresenter(post);
-  res.renderPost('front/post', { post, helpers: postsHelpers });
+  res.renderPost('front/post', {
+    post, comments: groupedComments[0], helpers: {
+      ...postsHelpers, hasChildren: function(commentID) {
+        return commentID in groupedComments;
+      }
+      , showChildren: function(commentID) {
+        return groupedComments[commentID];
+      }
+    }
+  });
 };

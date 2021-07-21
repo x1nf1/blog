@@ -5,42 +5,7 @@
         <!--comments area start-->
         <div class="comments">
           <h2 class="comments-title"> نظرات</h2>
-          <ul>
-            {{#each post.comments}}
-            <li class="comment ">
-              <article class="comment-body">
-                <footer class="comment-meta">
-                  <div class="comment-author">
-                    <img alt="" src="/static/assets/img/team/t-1.jpg" class="">
-                    <b class="fn">
-                      <a href="#" rel="external nofollow" class="url">
-                        {{this.user_name}}
-                      </a>
-                    </b>
-                    <span class="says">گفته:</span>
-                  </div>
-                  <!-- .comment-author -->
-
-                  <div class="comment-metadata">
-                    <a href="#">
-                      <time datetime="">
-                        {{#getJalaliCreatedAt this}} {{/getJalaliCreatedAt}}
-                      </time>
-                    </a>
-                  </div><!-- .comment-metadata -->
-
-                </footer><!-- .comment-meta -->
-
-                <div class="comment-content">
-                  <p>{{this.comment}}</p>
-                </div><!-- .comment-content -->
-
-                <div class="reply">
-                  <a rel="nofollow" class="comment-reply-link" href="#">پاسخ</a>
-                </div>
-              </article><!-- .comment-body -->
-            {{/each}}
-          </ul>
+          {{>comments/list comments = this.comments}}
         </div>
         <!--comments area end-->
 

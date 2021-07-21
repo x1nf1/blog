@@ -34,6 +34,7 @@
     "express-session": "^1.17.2",
     "gravatar": "^1.8.1",
     "jalali-moment": "^3.3.10",
+    "lodash": "^4.17.21",
     "module-alias": "^2.2.2",
     "mysql2": "^2.2.5",
     "redis": "^3.1.2"
@@ -46,6 +47,7 @@
     "@types/express-handlebars": "^5.3.1",
     "@types/express-session": "^1.17.4",
     "@types/gravatar": "^1.8.3",
+    "@types/lodash": "^4.14.171",
     "@types/module-alias": "^2.0.1",
     "typescript": "^4.3.5"
   }
