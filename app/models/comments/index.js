@@ -12,12 +12,23 @@ module.exports.fetchAllComments = async () => {
   return result;
 };
 
-module.exports.createComment = async function (commentData) {
+module.exports.fetchPostComments = async function(postID, status = commentStatuses.APPROVED) {
   const [result] = await db.query(
-    `INSERT INTO comments SET ?` , [commentData]
-  )
+    `SELECT *
+     FROM comments
+     WHERE post_id = ?
+     AND status = ?
+    `, [postID, status]
+  );
   return result;
-}
+};
+
+module.exports.createComment = async function(commentData) {
+  const [result] = await db.query(
+    `INSERT INTO comments SET ?`, [commentData]
+  );
+  return result;
+};
 
 module.exports.approveComment = async commentID => {
   const [result] = await db.query(
