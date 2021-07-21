@@ -12,6 +12,13 @@ module.exports.fetchAllComments = async () => {
   return result;
 };
 
+module.exports.createComment = async function (commentData) {
+  const [result] = await db.query(
+    `INSERT INTO comments SET ?` , [commentData]
+  )
+  return result;
+}
+
 module.exports.approveComment = async commentID => {
   const [result] = await db.query(
     'UPDATE comments SET status = ? WHERE id = ? LIMIT 1',

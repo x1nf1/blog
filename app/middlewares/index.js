@@ -26,7 +26,7 @@ module.exports = app => {
     };
 
     res.renderPost = function(template, options) {
-      res.render(template, { layout: 'post', ...options });
+      res.render(template, { layout: 'post', ...options, errors, success });
     };
     next();
   });
