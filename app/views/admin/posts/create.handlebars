@@ -31,7 +31,7 @@
             </ul>
           </div>
         {{/if}}
-        <form action='/admin/posts/compose' method='POST'>
+        <form action='/admin/posts/compose' method='POST' enctype='multipart/form-data'>
           <div class='row mbn-20'>
             <div class='col-12 mb-20'>
               <input
@@ -73,23 +73,28 @@
             </div>
 
             <div class='col-12 mb-20'>
+              <h6 class="mb-15">تصویر پست</h6>
+              <input name="thumbnail" type="file" class="form-control">
+            </div>
+
+            <div class='col-12 mb-20'>
               <h6 class='mb-15'>وضعیت مطلب</h6>
               <div class='form-group'>
                 <label class='inline'><input
-                    name='status'
-                    value='0'
-                    type='radio'
-                  />پیش نویس</label>
+                  name='status'
+                  value='0'
+                  type='radio'
+                />پیش نویس</label>
                 <label class='inline'><input
-                    name='status'
-                    value='1'
-                    type='radio'
-                  />در حال بازبینی</label>
+                  name='status'
+                  value='1'
+                  type='radio'
+                />در حال بازبینی</label>
                 <label class='inline'><input
-                    name='status'
-                    value='2'
-                    type='radio'
-                  />منتشرشده</label>
+                  name='status'
+                  value='2'
+                  type='radio'
+                />منتشرشده</label>
               </div>
             </div>
 

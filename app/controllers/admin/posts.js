@@ -5,6 +5,7 @@ const usersModel = require('@models/users');
 const PostPresenter = require('@presenters/posts');
 const postsHelpers = require('@helpers/posts');
 const postsValidator = require('@validators/posts');
+const uploadService = require('@services/uploadService');
 
 module.exports.index = async (req, res) => {
   let posts = await postsModel.fetchAllPosts();
@@ -38,6 +39,8 @@ module.exports.compose = async (req, res) => {
     req.flash('errors', validationError);
     return res.redirect('/admin/posts/create');
   } else {
+    const fileName = await uploadService.upload(req.files?.thumbnail);
+    postData.thumbnail = fileName;
     await postsModel.compose(postData);
     req.flash('success', 'مطلب با موفقیت ایجاد شد');
     return res.redirect('/admin/posts');

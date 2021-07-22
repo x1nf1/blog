@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const flash = require('connect-flash');
+const fileUpload = require('express-fileupload');
 
 
 module.exports = app => {
@@ -21,6 +22,10 @@ module.exports = app => {
       unset: 'destroy'
     })
   );
+  app.use(fileUpload({
+    useTempFiles: true,
+    createParentPath: true
+  }));
   app.use(flash());
   app.engine('handlebars', exphbs());
   app.set('view engine', 'handlebars');
