@@ -48,6 +48,17 @@ module.exports.fetchPostBySlug = async postSlug => {
   return result[0];
 };
 
+module.exports.findByKeyword = async function(keyword) {
+  const [result] = await db.query(`
+  SELECT posts.*, users.full_name
+  FROM posts
+  LEFT JOIN users ON posts.author_id = users.id
+  WHERE posts.title LIKE ?
+  ORDER BY created_at DESC
+  `,['%' + keyword +  '%']);
+  return result;
+}
+
 module.exports.compose = async postData => {
   const [result] = await db.query('INSERT INTO posts SET ?', postData);
   return result;

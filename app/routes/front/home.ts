@@ -7,6 +7,7 @@ class HomeRouter {
 
   constructor() {
     this._router.get('/', homeControllers.index);
+    this._router.get('/search',homeControllers.search);
   }
 
   get router(): any {

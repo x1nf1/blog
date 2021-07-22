@@ -28,3 +28,20 @@ module.exports.index = async function(req, res, next) {
     posts: presentedPosts, helpers: PostsHelpers, pagination, config: settings
   });
 };
+
+module.exports.search = async function(req, res) {
+  const settings = {
+    websiteTitle: await settingsModel.get('website_title'),
+    websiteDescription: await settingsModel.get('website_description'),
+    perPage: await settingsModel.get('posts_per_page')
+  };
+  const posts = await postsModel.findByKeyword(req.query.search);
+  const presentedPosts = posts.map(post => {
+    post.presenter = new PostsPresenter(post);
+    return post;
+  });
+
+  res.renderFront('front/home/search', {
+    posts: presentedPosts, helpers: PostsHelpers,config: settings
+  });
+};
