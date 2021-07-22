@@ -16,3 +16,12 @@ module.exports.update = async updateFields => {
     );
   }
 };
+
+module.exports.get = async function(settingName) {
+  const [settingValue] = await db.query(`
+  SELECT setting_value
+  FROM settings
+  WHERE setting_name = ?
+  `, [settingName]);
+  return settingValue[0].setting_value ?? null;
+};
