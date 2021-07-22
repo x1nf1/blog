@@ -15,3 +15,5 @@ app/presenters/**/*.js
 app/presenters/**/*.map
 app/helpers/**/*.js
 app/helpers/**/*.map
+/tmp
+public/uploads/
